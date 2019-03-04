@@ -72,7 +72,8 @@ ENV OUTPUT_DIR /data
 VOLUME ${OUTPUT_DIR}
 
 # copy in the cnacs db
-COPY db.tar.gz /data
-RUN cd /data && \
+RUN cd && mkdir /ref
+COPY db.tar.gz /ref/db.tar.gz
+RUN cd /ref && \
     tar -xf db.tar.gz && \
     rm db.tar.gz

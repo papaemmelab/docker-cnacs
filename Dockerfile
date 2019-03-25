@@ -76,4 +76,7 @@ RUN cd && mkdir /ref
 COPY db.tar.gz /ref/db.tar.gz
 RUN cd /ref && \
     tar -xf db.tar.gz && \
-    rm db.tar.gz
+    mv db _db && \
+    cp -r _db db && \
+    rm -rf _db db.tar.gz && \
+    chmod -R a+rX /ref

@@ -80,3 +80,6 @@ RUN cd /ref && \
     cp -r _db db && \
     rm -rf _db db.tar.gz && \
     chmod -R a+rX /ref
+
+# export TMPDIR
+ENV TMPDIR /tmp

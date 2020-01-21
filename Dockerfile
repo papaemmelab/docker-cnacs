@@ -1,4 +1,4 @@
-FROM python:2.7-jessie
+FROM python:2.7-stretch
 
 RUN \
     # install packages dependencies
@@ -18,18 +18,15 @@ RUN \
     /usr/sbin/update-locale LANG=en_US.UTF-8
 
 # Java 8
-RUN add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" && \
-    apt-get update && \
-    echo oracle-java8-set-default shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get -y install oracle-java8-installer
+RUN apt-get install -y openjdk-8-jdk
 
 ENV JAVAPATH /usr/bin
 ENV PERL_PATH /usr/bin/perl
 
 # R 3.4
-RUN add-apt-repository "deb http://cran.rstudio.com/bin/linux/debian jessie-cran34/" && \
+RUN add-apt-repository "deb http://cran.rstudio.com/bin/linux/debian stretch-cran34/" && \
     apt-get update && \
-    apt-get -y --force-yes install -t jessie-cran34 r-base && \
+    apt-get -y --force-yes install -t stretch-cran34 r-base && \
     R -e "install.packages(c('MASS','DPpackage'),repos='https://cloud.r-project.org')" && \
     R -e "source('https://bioconductor.org/biocLite.R');BiocInstaller::biocLite(c('DNAcopy'))"
 
